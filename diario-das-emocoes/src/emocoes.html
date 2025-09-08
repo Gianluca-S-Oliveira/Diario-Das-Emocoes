@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Como você está se sentindo?</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Como você está se sentindo hoje?</h2>
+        <form id="emocaoForm" class="emocao-form">
+           <!-- Substitua o bloco .emojis no seu emocoes.html -->
+<div class="emojis">
+    <label class="emoji-option">
+        <input type="radio" name="emocao" value="feliz" required>
+        <span class="emoji-img-circle">
+            <img src="assets/feliz.jpg" alt="Feliz" />
+        </span>
+        <span class="emoji-label">Feliz</span>
+    </label>
+    <label class="emoji-option">
+        <input type="radio" name="emocao" value="triste">
+        <span class="emoji-img-circle">
+            <img src="assets/triste.jpg" alt="Triste" />
+        </span>
+        <span class="emoji-label">Triste</span>
+    </label>
+    <label class="emoji-option">
+        <input type="radio" name="emocao" value="bravo">
+        <span class="emoji-img-circle">
+            <img src="assets/bravo.png" alt="Bravo" />
+        </span>
+        <span class="emoji-label">Bravo</span>
+    </label>
+    <label class="emoji-option">
+        <input type="radio" name="emocao" value="animado">
+        <span class="emoji-img-circle">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYC6014DG1abawYR28yxq9HphhYdhLxV8MEQ&s" alt="Animado" />
+        </span>
+        <span class="emoji-label">Animado</span>
+    </label>
+    <label class="emoji-option">
+        <input type="radio" name="emocao" value="relaxado">
+        <span class="emoji-img-circle">
+            <img src="assets/relacado.jpg" alt="Relaxado" />
+        </span>
+        <span class="emoji-label">Relaxado</span>
+    </label>
+</div>
+            <textarea name="descricao" placeholder="Escreva sobre seus sentimentos..." required></textarea>
+            <div class="emocao-actions">
+                <button type="submit" class="btn-emocao">Salvar minha emoção</button>
+                <a href="lista.html" class="btn-emocao">Ver minhas emoções</a>
+            </div>
+        </form>
+    </div>
+    <script src="scripts/emocoes.js"></script>
+    <script src="scripts/bubbles.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,272 @@
+/* Google Fonts import for calm, rounded font */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@700&family=Nunito:wght@700&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: #fffbe6;
+    font-family: 'Nunito', 'Quicksand', Arial, sans-serif;
+    overflow: hidden;
+    position: relative;
+}
+
+h1 {
+    color: #fbc02d; /* Main yellow color */
+    text-align: center;
+    margin-top: 50px;
+    font-size: 2.5em;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0; /* Remove espaçamento extra */
+}
+
+.logo {
+    width: 600px;         /* Aumente o tamanho da logo */
+    max-width: 90vw;
+    height: auto;
+    margin-bottom: 24px;  /* Menor distância para o botão */
+    display: block;
+    z-index: 2;
+}
+
+.start-button {
+    background: linear-gradient(90deg, #f5df8a 0%, #ffd600 100%);
+    color: #222;
+    font-size: 1.3rem;
+    font-family: 'Nunito', 'Quicksand', Arial, sans-serif;
+    font-weight: 800;
+    z-index: 3y;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 40px;
+    box-shadow: 0 4px 24px 0 #ffe06680;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, background 0.3s;
+    letter-spacing: 0.03em;
+}
+
+.start-button:hover, .start-button:focus {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 8px 32px 0 #ffd60080;
+    background: linear-gradient(90deg, #ffd600 0%, #ffe066 100%);
+    outline: none;
+}
+
+/* Remove sublinhado do botão-link */
+a.start-button {
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* Large title style */
+.logo + .start-button {
+    margin-top: 32px;
+}
+
+/* Bubble animation background */
+.bubble {
+    position: fixed;
+    border-radius: 50%;
+    opacity: 0.22;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(0.5px);
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.22;
+    }
+    50% {
+        opacity: 0.32;
+        transform: translateY(-60px) scale(1.08);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.22;
+    }
+}
+
+/* Emotion form styles */
+.emocao-form {
+    background: #fff;
+    z-index:3;
+    border-radius: 24px;
+    box-shadow: 0 4px 24px #ffe06640;
+    padding: 32px 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    max-width: 420px;
+    width: 100%;
+}
+
+.emojis {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 8px;
+}
+
+.emoji {
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: transform 0.15s;
+    display: inline-block;
+    filter: grayscale(0.4);
+}
+
+input[type="radio"]:checked + .emoji {
+    transform: scale(1.15);
+    filter: grayscale(0) drop-shadow(0 0 8px #ffe066);
+}
+
+textarea {
+    width: 100%;
+    min-height: 70px;
+    border-radius: 16px;
+    border: 1px solid #ffe066;
+    padding: 16px;
+    font-size: 1.1rem;
+    font-family: inherit;
+    resize: vertical;
+    outline: none;
+    transition: border 0.2s;
+}
+
+textarea:focus {
+    border: 2px solid #ffd600;
+}
+
+.emoji-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.emoji-img-circle {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #fffbe6;
+    border: 3px solid #ffe066;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px #ffe06640;
+    transition: border 0.2s, box-shadow 0.2s, transform 0.15s;
+    margin-bottom: 6px;
+    animation: pulse 1.2s infinite;
+}
+
+.emoji-option input[type="radio"]:checked + .emoji-img-circle,
+.emoji-option:hover .emoji-img-circle {
+    border: 3px solid #ffd600;
+    box-shadow: 0 0 0 6px #ffe06660;
+    transform: scale(1.12);
+    background: #fffde7;
+    animation: none;
+}
+
+.emoji-option input[type="radio"]:checked + .emoji-img-circle {
+    animation: none;
+}
+.emoji-option input[type="radio"] {
+    display: none;
+}
+
+.emoji-img-circle img {
+    width: 84px;
+    height: 44px;
+    object-fit: contain;
+    border-radius: 50%;
+    user-select: none;
+    pointer-events: none;
+  
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 #ffe06660; }
+    70% { box-shadow: 0 0 0 10px #ffe06620; }
+    100% { box-shadow: 0 0 0 0 #ffe06660; }
+}
+
+/* Descrição da emoção */
+.emoji-label {
+    margin-top: 2px;
+    font-size: 1.05rem;
+    color: #bfa700;
+    text-align: center;
+    font-family: 'Nunito', 'Quicksand', Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    max-width: 80px;
+    line-height: 1.1;
+}
+
+/* Todas pulsam por padrão */
+.emoji-img-circle {
+    animation: pulse 1.2s infinite;
+}
+
+/* Se alguma está em hover, pare todas... */
+.emojis:hover .emoji-img-circle {
+    animation: none;
+}
+
+/* ...mas a que está em hover segue pulsando */
+.emoji-option:hover .emoji-img-circle {
+    animation: pulse 1.2s infinite;
+}
+
+/* Se alguma está selecionada, nenhuma pulsa */
+.emoji-option input[type="radio"]:checked + .emoji-img-circle {
+    animation: none !important;
+}
+
+/* Botões do formulário de emoção */
+.emocao-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+    width: 300px;
+    margin-top: 8px;
+}
+
+.btn-emocao {
+    background: linear-gradient(90deg, #ffd600 0%, #ffe066 100%);
+    color: #222;
+    font-size: 1.05rem;
+    font-family: 'Nunito', 'Quicksand', Arial, sans-serif;
+    font-weight: 700;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 18px;
+    box-shadow: 0 2px 10px 0 #ffe06650;
+    cursor: pointer;
+    transition: transform 0.13s, box-shadow 0.13s, background 0.2s;
+    letter-spacing: 0.01em;
+    outline: none;
+    min-width: 120px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-emocao:hover, .btn-emocao:focus {
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 18px 0 #ffd60080;
+    background: linear-gradient(90deg, #ffe066 0%, #ffd600 100%);
+    color: #222;
+}

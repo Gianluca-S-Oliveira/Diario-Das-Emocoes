@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <circle cx="100" cy="100" r="80" fill="#FFD700" />
+  <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="20" fill="#000" text-anchor="middle" alignment-baseline="middle">
+    Diário das Emoções
+  </text>
+</svg>

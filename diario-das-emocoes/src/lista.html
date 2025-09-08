@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Emoções</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .lista-container {
+            max-width: 500px;
+            margin: 40px auto 0 auto;
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 4px 24px #ffe06640;
+            padding: 32px 24px;
+        }
+        .lista-title {
+            text-align: center;
+            color: #fbc02d;
+            font-size: 2rem;
+            margin-bottom: 24px;
+            font-family: 'Nunito', 'Quicksand', Arial, sans-serif;
+        }
+        .emocao-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            background: #fffbe6;
+            border-radius: 16px;
+            margin-bottom: 18px;
+            padding: 16px 18px;
+            box-shadow: 0 2px 8px #ffe06630;
+            transition: box-shadow 0.2s;
+        }
+        .emocao-item:hover {
+            box-shadow: 0 4px 16px #ffd60040;
+        }
+        .emocao-emoji {
+            font-size: 2.2rem;
+            margin-top: 2px;
+        }
+        .emocao-info {
+            flex: 1;
+        }
+        .emocao-data {
+            font-size: 0.95rem;
+            color: #bfa700;
+            margin-bottom: 4px;
+        }
+        .emocao-desc {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 0;
+        }
+        .voltar-link {
+            display: block;
+            margin: 24px auto 0 auto;
+            text-align: center;
+            color: #fff;
+            background: linear-gradient(90deg, #ffd600 0%, #ffe066 100%);
+            border-radius: 40px;
+            padding: 14px 36px;
+            font-size: 1.1rem;
+            font-family: 'Nunito', 'Quicksand', Arial, sans-serif;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 2px 12px #ffe06680;
+            width: fit-content;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+        .voltar-link:hover {
+            background: linear-gradient(90deg, #ffe066 0%, #ffd600 100%);
+            box-shadow: 0 4px 20px #ffd60080;
+        }
+    </style>
+</head>
+<body>
+    <div class="lista-container">
+        <div class="lista-title">Minhas Emoções</div>
+        <div id="listaEmocoes"></div>
+        <a href="emocoes.html" class="voltar-link">Voltar</a>
+    </div>
+    <script>
+        // Emojis para cada emoção
+        const emojiMap = {
+            feliz: "😊",
+            triste: "😢",
+            bravo: "😠",
+            animado: "😄",
+            relaxado: "😌"
+        };
+
+        function formatarData(dataISO) {
+            const data = new Date(dataISO);
+            return data.toLocaleDateString('pt-BR') + ' às ' + data.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function renderizarLista() {
+            const lista = document.getElementById('listaEmocoes');
+            const diarios = JSON.parse(localStorage.getItem('diarioEmocoes') || '[]').reverse();
+            if (diarios.length === 0) {
+                lista.innerHTML = "<p style='text-align:center;color:#bfa700;'>Nenhuma emoção cadastrada ainda.</p>";
+                return;
+            }
+            lista.innerHTML = diarios.map(item => `
+                <div class="emocao-item">
+                    <div class="emocao-emoji">${emojiMap[item.emocao] || "🙂"}</div>
+                    <div class="emocao-info">
+                        <div class="emocao-data">${formatarData(item.data)}</div>
+                        <div class="emocao-desc">${item.descricao}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        renderizarLista(); // <-- CHAME A FUNÇÃO AQUI!
+    </script>
+</body>
+</html>
