@@ -9,10 +9,11 @@
         .lista-container {
             max-width: 500px;
             margin: 40px auto 0 auto;
-            background: #fff;
             border-radius: 24px;
             box-shadow: 0 4px 24px #ffe06640;
             padding: 32px 24px;
+            background-color:white; z-index: 13;
+            display:flex; flex-direction:column; align-items:center;
         }
         .lista-title {
             text-align: center;
@@ -24,6 +25,7 @@
         .emocao-item {
             display: flex;
             align-items: flex-start;
+            justify-content: space-between;
             gap: 16px;
             background: #fffbe6;
             border-radius: 16px;
@@ -35,9 +37,26 @@
         .emocao-item:hover {
             box-shadow: 0 4px 16px #ffd60040;
         }
-        .emocao-emoji {
-            font-size: 2.2rem;
+        .emocao-emoji-img {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: #fffbe6;
+            border: 3px solid #ffe066;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px #ffe06640;
             margin-top: 2px;
+            overflow: hidden;
+        }
+        .emocao-emoji-img img {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            border-radius: 50%;
+            user-select: none;
+            pointer-events: none;
         }
         .emocao-info {
             flex: 1;
@@ -53,7 +72,6 @@
             margin-bottom: 0;
         }
         .voltar-link {
-            display: block;
             margin: 24px auto 0 auto;
             text-align: center;
             color: #fff;
@@ -72,6 +90,20 @@
             background: linear-gradient(90deg, #ffe066 0%, #ffd600 100%);
             box-shadow: 0 4px 20px #ffd60080;
         }
+     .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #e53935; /* vermelho */
+    font-size: 1.3rem;
+    margin-left: 10px;
+    transition: transform 0.2s, color 0.2s;
+}
+.delete-btn:hover {
+    transform: scale(1.2);
+    color: #b71c1c; /* vermelho mais escuro no hover */
+}
+
     </style>
 </head>
 <body>
@@ -80,14 +112,14 @@
         <div id="listaEmocoes"></div>
         <a href="emocoes.html" class="voltar-link">Voltar</a>
     </div>
+
     <script>
-        // Emojis para cada emoção
-        const emojiMap = {
-            feliz: "😊",
-            triste: "😢",
-            bravo: "😠",
-            animado: "😄",
-            relaxado: "😌"
+        const emojiImgMap = {
+            feliz: "assets/feliz.jpg",
+            triste: "assets/triste.jpg",
+            bravo: "assets/bravo.png",
+            animado: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYC6014DG1abawYR28yxq9HphhYdhLxV8MEQ&s",
+            relaxado: "assets/relacado.jpg"
         };
 
         function formatarData(dataISO) {
@@ -95,25 +127,43 @@
             return data.toLocaleDateString('pt-BR') + ' às ' + data.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
         }
 
+        function excluirEmocao(index) {
+            let diarios = JSON.parse(localStorage.getItem('diarioEmocoes') || '[]');
+            diarios.reverse(); // pois foi invertido na renderização
+            diarios.splice(index, 1);
+            localStorage.setItem('diarioEmocoes', JSON.stringify(diarios));
+            renderizarLista();
+        }
+
         function renderizarLista() {
             const lista = document.getElementById('listaEmocoes');
-            const diarios = JSON.parse(localStorage.getItem('diarioEmocoes') || '[]').reverse();
+            let diarios = JSON.parse(localStorage.getItem('diarioEmocoes') || '[]').reverse();
             if (diarios.length === 0) {
                 lista.innerHTML = "<p style='text-align:center;color:#bfa700;'>Nenhuma emoção cadastrada ainda.</p>";
                 return;
             }
-            lista.innerHTML = diarios.map(item => `
+            lista.innerHTML = diarios.map((item, index) => `
                 <div class="emocao-item">
-                    <div class="emocao-emoji">${emojiMap[item.emocao] || "🙂"}</div>
-                    <div class="emocao-info">
-                        <div class="emocao-data">${formatarData(item.data)}</div>
-                        <div class="emocao-desc">${item.descricao}</div>
+                    <div style="display:flex; gap:12px; align-items:center; flex:1;">
+                        <div class="emocao-emoji-img">
+                            <img src="${emojiImgMap[item.emocao] || 'assets/feliz.jpg'}" alt="${item.emocao}" />
+                        </div>
+                        <div class="emocao-info">
+                            <div class="emocao-data">${formatarData(item.data)}</div>
+                            <div class="emocao-desc">${item.descricao}</div>
+                        </div>
                     </div>
+                    <button class="delete-btn" onclick="excluirEmocao(${index})" title="Excluir">
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M9 3v1H4v2h16V4h-5V3H9zm-3 6h12l-1 12H7L6 9z"/>
+    </svg>
+</button>
                 </div>
             `).join('');
         }
 
-        renderizarLista(); // <-- CHAME A FUNÇÃO AQUI!
+        renderizarLista();
     </script>
+    <script src="scripts/bubbles.js"></script>
 </body>
 </html>

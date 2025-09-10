@@ -7,7 +7,7 @@ body {
     min-height: 100vh;
     background: #fffbe6;
     font-family: 'Nunito', 'Quicksand', Arial, sans-serif;
-    overflow: hidden;
+    overflow-x: hidden; /* Permite rolar para baixo */
     position: relative;
 }
 
